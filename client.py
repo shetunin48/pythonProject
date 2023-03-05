@@ -1,6 +1,15 @@
 import requests
 import json
 
+# TODO: user
+headers = requests.utils.default_headers()
+
+headers.update(
+    {
+        'User-Agent': 'My User Agent 1.0',
+    }
+)
+
 json_string = {
     "researcher": {
         "name": "Ford Prefect",
@@ -11,8 +20,9 @@ json_string = {
                 "species": "Betelgeusian"
             }
         ]
-    }
+    },
+    "spaceship": "spoon"
 }
 x = json.dumps(json_string)
-
-print(requests.post("http://127.0.0.5:8000//keys", bytearray(x, "utf-8")))
+ans = requests.post("http://127.0.0.5:8000//keys", bytearray(x, "utf-8"), headers=headers)
+print(ans)
