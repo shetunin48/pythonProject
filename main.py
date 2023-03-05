@@ -1,15 +1,16 @@
 import socketserver
-from http.server import HTTPServer, BaseHTTPRequestHandler
+import json
 
 
-class Myserver(BaseHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(200, "idk1")
-        self.send_header("idk2", "idk3")
-        self.end_headers()
+class Myserver(socketserver.BaseRequestHandler):
+    def handle(self):
+        print(":)")
+
+        a = str(self.request.recv(1024).strip(), "utf-8").split('\n')
+        print(a[-1])
 
 
-server = HTTPServer(('', 8000), Myserver)
+server = socketserver.TCPServer(('127.0.0.5', 8000), Myserver)
 
 print("is running")
 server.serve_forever()
