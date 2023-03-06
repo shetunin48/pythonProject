@@ -1,28 +1,22 @@
-import requests
 import json
 
-# TODO: user
-headers = requests.utils.default_headers()
+import grpc
+import prot_pb2
+import prot_pb2_grpc
 
-headers.update(
-    {
-        'User-Agent': 'My User Agent 1.0',
-    }
-)
+with grpc.insecure_channel('localhost:50050') as channel:
+    stub = prot_pb2_grpc.MyserverStub(channel)
+    # list_request = input().split('?')
+    # op = list_request[0]
+    op = "/generate"
+    if op == "/key":
+        f = open('client_data.json')
+        request = prot_pb2.Keys_Request(json=json.dumps(json.load(f)))
+        f.close()
+        print(json.loads(stub.GetKeys(request).json))
 
-json_string = {
-    "researcher": {
-        "name": "Ford Prefect",
-        "species": "Betelgeusian",
-        "relatives": [
-            {
-                "name": "Zaphod Beeblebrox",
-                "species": "Betelgeusian"
-            }
-        ]
-    },
-    "spaceship": "spoon"
-}
-x = json.dumps(json_string)
-ans = requests.post("http://127.0.0.5:8000//keys", bytearray(x, "utf-8"), headers=headers)
-print(ans)
+    elif op == "/generate":
+        request = prot_pb2.Generate_Request(level=1, numkeys=10)
+        print(json.loads(stub.GenerateJson(request).json))
+        pass
+

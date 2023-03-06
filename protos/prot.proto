@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package prot;
+
+service Myserver {
+    rpc GetKeys (Keys_Request) returns (Simple_Json_Reply);
+    rpc GenerateJson (Generate_Request) returns (Simple_Json_Reply);
+    rpc FindValue (Find_Request) returns (Simple_Json_Reply);
+    rpc Convert (Convert_Request) returns (Convert_Reply);
+}
+
+// messages types
+message Keys_Request {
+    string json = 1;
+}
+message Generate_Request {
+    int32 level = 1;
+    int32 numkeys = 2;
+}
+message Find_Request {
+    string value = 1;
+    string json = 2;
+}
+message Convert_Request {
+    string audioformat = 1;
+    string base64 = 2;
+}
+
+// replies types
+message Simple_Json_Reply {
+    string json = 1;
+}
+
+message Convert_Reply {
+    string base64 = 1;
+}
