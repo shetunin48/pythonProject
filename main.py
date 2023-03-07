@@ -21,7 +21,8 @@ class Myserver(prot_pb2_grpc.Myserver):
 
     def FindValue(self, request, context):
         print("Find Value")
-        js = find_value(request.level, request.numkeys)
+        js = find_value(request.json, request.value)
+        print(js)
         reply = prot_pb2.Simple_Json_Reply(json=js)
         return reply
 

@@ -3,7 +3,7 @@ import string
 from random import randint, random, choices
 
 
-def rstring():
+def randstring():
     letters = string.ascii_letters
     return ''.join(choices(letters, k=randint(3, 10)))
 
@@ -11,7 +11,7 @@ def rstring():
 def datatype(level, keys):
     t = randint(0, 6 - (level == 0) * 2)  # for every 7 type in json, if level is 0, then types are 5
     if t == 0:
-        return rstring()
+        return randstring()
     elif t == 1:
         return randint(-255, 256)
     elif t == 2:
@@ -36,21 +36,21 @@ def create_json(level, keys):
 
 
 def generate_json(level, numkeys):
-    return json.dumps(create_json(level, [rstring() for _ in range(numkeys)]))
+    return json.dumps(create_json(level, [randstring() for _ in range(numkeys)]))
 
 
 def get_keys(js):
     t_dict = json.loads(js)
     a = [i for i in t_dict]
-    return json.dumps(json.JSONEncoder().encode(a))
+    return json.dumps(a)
 
 
 def search_dict_for_value(t_dict, value):
     a = []
     for i in t_dict:
-        if i.__class__ == dict:
-            a.__add__(search_dict_for_value(i, value))
-        if i == value:
+        if t_dict[i].__class__ == dict:
+            a.extend(search_dict_for_value(t_dict[i], value))
+        if t_dict[i] == value:
             a.append(i)
     return a
 
@@ -58,5 +58,7 @@ def search_dict_for_value(t_dict, value):
 def find_value(js, value):
     t_dict = json.loads(js)
     a = search_dict_for_value(t_dict, value)
-    return json.dumps(json.JSONEncoder.encode(a))
+    print(a)
+    return json.dumps(a)
+
 
