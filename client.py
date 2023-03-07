@@ -1,11 +1,13 @@
-import base64
 import json
 
 import grpc
-import prot_pb2
+from protos import prot_pb2
 import prot_pb2_grpc
+from consts import MAX_MESSAGE_LENGTH
 
-with grpc.insecure_channel('localhost:50050') as channel:
+with grpc.insecure_channel('localhost:50050', options=[
+        ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
+        ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH)]) as channel:
     stub = prot_pb2_grpc.MyserverStub(channel)
     # list_request = input().split('?')
     # op = list_request[0]
@@ -25,9 +27,8 @@ with grpc.insecure_channel('localhost:50050') as channel:
         f.close()
         print(json.loads(stub.FindValue(request).json))
     elif op == "/convert":
-        f = open('music.flac', "rb")
-        data = base64.b64encode(f.read())
+        f = open('music.flac', 'rb')
+        data = f.read()
         f.close()
         request = prot_pb2.Convert_Request(audioformat="flac", base64=data)
         stub.Convert(request)
-

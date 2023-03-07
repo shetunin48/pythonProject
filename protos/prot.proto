@@ -23,7 +23,7 @@ message Find_Request {
 }
 message Convert_Request {
     string audioformat = 1;
-    string base64 = 2;
+    bytes base64 = 2;
 }
 
 // replies types
@@ -32,5 +32,5 @@ message Simple_Json_Reply {
 }
 
 message Convert_Reply {
-    string base64 = 1;
+    bytes base64 = 1;
 }
