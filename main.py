@@ -1,3 +1,5 @@
+import base64
+import io
 from concurrent import futures
 import json
 import grpc
@@ -27,6 +29,10 @@ class Myserver(prot_pb2_grpc.Myserver):
         return reply
 
     def Convert(self, request, context):
+        print("Convert")
+        f = io.StringIO(request.base64)
+        print("Find Value")
+        print(f.readline())
         return super().Convert(self, request, context)
 
 
