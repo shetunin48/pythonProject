@@ -2,10 +2,12 @@ import json
 import string
 from random import randint, random, choices
 
+from consts import MIN_KEY_LEN, MAX_KEY_LEN, MIN_RAND_INT, MAX_RAND_INT
+
 
 def randstring():
     letters = string.ascii_letters
-    return ''.join(choices(letters, k=randint(3, 10)))
+    return ''.join(choices(letters, k=randint(MIN_KEY_LEN, MAX_KEY_LEN)))
 
 
 def datatype(level, keys):
@@ -13,9 +15,9 @@ def datatype(level, keys):
     if t == 0:
         return randstring()
     elif t == 1:
-        return randint(-255, 256)
+        return randint(-MIN_RAND_INT, MAX_RAND_INT)
     elif t == 2:
-        return random() * randint(-255, 256)
+        return random() * randint(-MIN_RAND_INT, MAX_RAND_INT)
     elif t == 3:
         return randint(0, 1) == 1
     elif t == 4:
@@ -60,5 +62,3 @@ def find_value(js, value):
     a = search_dict_for_value(t_dict, value)
     print(a)
     return json.dumps(a)
-
-
