@@ -36,12 +36,12 @@ class Myserver(prot_pb2_grpc.MyserverServicer):
         print("Convert")
         f = io.BytesIO(request.base64)
         flac_audio = AudioSegment.from_file(f, format=request.audioformat)
-        flac_audio.export("./tmp/music.mp3", format="mp3", bitrate="320k")
+        flac_audio.export("/tmp/music.mp3", format="mp3", bitrate="320k")
 
-        f = open("./tmp/music.mp3", "rb")
+        f = open("/tmp/music.mp3", "rb")
         data = f.read()
         f.close()
-        os.remove("./tmp/music.mp3")
+        os.remove("/tmp/music.mp3")
 
         reply = prot_pb2.Convert_Reply(base64=data)
         return reply

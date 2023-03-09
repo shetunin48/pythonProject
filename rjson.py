@@ -11,7 +11,7 @@ def randstring():
 
 
 def datatype(level, keys):
-    t = randint(0, 6 - (level == 0) * 2)  # for every 7 type in json, if level is 0, then types are 5
+    t = randint(0, 6 - (level == 0) * 2)  # for every 7 types in json, if level is 0, then types are 5
     if t == 0:
         return randstring()
     elif t == 1:
@@ -38,7 +38,7 @@ def create_json(level, keys):
 
 
 def generate_json(level, numkeys):
-    return create_json(level, [randstring() for _ in range(numkeys)])
+    return json.dumps(create_json(level, [randstring() for _ in range(numkeys)]))
 
 
 def get_keys(js):
@@ -59,7 +59,7 @@ def search_dict_for_value(t_dict, value, error=None):
                 if t_dict[i] == int(value):
                     a.append(i)
             except ValueError:
-                pass
+                continue
     return a
 
 
@@ -67,8 +67,3 @@ def find_value(js, value):
     t_dict = json.loads(js)
     a = search_dict_for_value(t_dict, value)
     return a
-
-
-str1 = "{\"WTF\": [1,2,3]}"
-str2 = "[1,2,3]"
-find_value(str1, str2)

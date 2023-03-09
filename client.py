@@ -7,6 +7,17 @@ import prot_pb2_grpc
 from consts import MAX_MESSAGE_LENGTH
 
 
+def try_open(ind, how="r"):
+    try:
+        return open(sys.argv[ind + 1], how)
+    except FileNotFoundError:
+        print("Couldn't open file")
+        sys.exit(-1)
+    except FileExistsError:
+        print("Couldn't open file")
+        sys.exit(-1)
+
+
 def client():
     if ("-h" in sys.argv) or len(sys.argv) == 1:
         print("\n-------------------------------------------\n"
@@ -24,46 +35,43 @@ def client():
         url = sys.argv[sys.argv.index("--url") + 1]
 
     with grpc.insecure_channel(url, options=[
-            ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
-            ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH)]) as channel:
+        ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
+        ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH)]) as channel:
         stub = prot_pb2_grpc.MyserverStub(channel)
 
         file_out = sys.stdout
         if "--file" in sys.argv:
-            file_out = open(sys.argv[sys.argv.index("--file") + 1])
+            ind = sys.argv.index("--file")
+            file_out = try_open(ind)
 
         if "--keys" in sys.argv:
             ind = sys.argv.index("--keys")
-            f = open(sys.argv[ind + 1])
+            f = try_open(ind)
             request = prot_pb2.Keys_Request(json=json.dumps(json.load(f)))
             f.close()
-            print(json.loads(stub.GetKeys(request).json), file=file_out)
+            print(stub.GetKeys(request).arr, file=file_out)
 
         elif "--generate" in sys.argv:
             ind = sys.argv.index("--generate")
             request = prot_pb2.Generate_Request(level=int(sys.argv[ind + 1]), numkeys=int(sys.argv[ind + 2]))
-            print(json.loads(stub.GenerateJson(request).json), file=file_out)
+            print(stub.GenerateJson(request).json, file=file_out)
 
         elif "--find" in sys.argv:
             ind = sys.argv.index("--find")
-            f = open(sys.argv[ind + 1])
+            f = try_open(ind)
             request = prot_pb2.Find_Request(json=json.dumps(json.load(f)), value=sys.argv[ind + 2])
             f.close()
-            print(json.loads(stub.FindValue(request).json), file=file_out)
+            print(stub.FindValue(request).arr, file=file_out)
 
         elif "--convert" in sys.argv:
             ind = sys.argv.index("--convert")
-            f = open(sys.argv[ind + 1], 'rb')
+            f = try_open(ind, 'rb')
             data = f.read()
             f.close()
 
             request = prot_pb2.Convert_Request(audioformat=(sys.argv[ind + 1].split('.')[-1]), base64=data)
-            try:
-                file_out = open(sys.argv[ind + 2], 'wb')
-                file_out.write(stub.Convert(request).base64)
-            except:
-                print("Couldn't open file")
-                return
+            file_out = try_open(ind + 1, 'wb')
+            file_out.write(stub.Convert(request).base64)
 
         file_out.close()
 
