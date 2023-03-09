@@ -38,27 +38,37 @@ def create_json(level, keys):
 
 
 def generate_json(level, numkeys):
-    return json.dumps(create_json(level, [randstring() for _ in range(numkeys)]))
+    return create_json(level, [randstring() for _ in range(numkeys)])
 
 
 def get_keys(js):
     t_dict = json.loads(js)
     a = [i for i in t_dict]
-    return json.dumps(a)
+    return a
 
 
-def search_dict_for_value(t_dict, value):
+def search_dict_for_value(t_dict, value, error=None):
     a = []
     for i in t_dict:
         if t_dict[i].__class__ == dict:
             a.extend(search_dict_for_value(t_dict[i], value))
         if t_dict[i] == value:
             a.append(i)
+        else:
+            try:  # if value is int
+                if t_dict[i] == int(value):
+                    a.append(i)
+            except ValueError:
+                pass
     return a
 
 
 def find_value(js, value):
     t_dict = json.loads(js)
     a = search_dict_for_value(t_dict, value)
-    print(a)
-    return json.dumps(a)
+    return a
+
+
+str1 = "{\"WTF\": [1,2,3]}"
+str2 = "[1,2,3]"
+find_value(str1, str2)

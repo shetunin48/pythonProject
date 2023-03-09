@@ -11,27 +11,33 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
+from google.protobuf import any_pb2 as google_dot_protobuf_dot_any__pb2
+from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nprot.proto\x12\x04prot\"\x1c\n\x0cKeys_Request\x12\x0c\n\x04json\x18\x01 \x01(\t\"2\n\x10Generate_Request\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0f\n\x07numkeys\x18\x02 \x01(\x05\"+\n\x0c\x46ind_Request\x12\r\n\x05value\x18\x01 \x01(\t\x12\x0c\n\x04json\x18\x02 \x01(\t\"6\n\x0f\x43onvert_Request\x12\x13\n\x0b\x61udioformat\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\"!\n\x11Simple_Json_Reply\x12\x0c\n\x04json\x18\x01 \x01(\t\"\x1f\n\rConvert_Reply\x12\x0e\n\x06\x62\x61se64\x18\x01 \x01(\x0c\x32\xf4\x01\n\x08Myserver\x12\x36\n\x07GetKeys\x12\x12.prot.Keys_Request\x1a\x17.prot.Simple_Json_Reply\x12?\n\x0cGenerateJson\x12\x16.prot.Generate_Request\x1a\x17.prot.Simple_Json_Reply\x12\x38\n\tFindValue\x12\x12.prot.Find_Request\x1a\x17.prot.Simple_Json_Reply\x12\x35\n\x07\x43onvert\x12\x15.prot.Convert_Request\x1a\x13.prot.Convert_Replyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nprot.proto\x12\x04prot\x1a\x19google/protobuf/any.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x1c\n\x0cKeys_Request\x12\x0c\n\x04json\x18\x01 \x01(\t\"2\n\x10Generate_Request\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0f\n\x07numkeys\x18\x02 \x01(\x05\"+\n\x0c\x46ind_Request\x12\r\n\x05value\x18\x01 \x01(\t\x12\x0c\n\x04json\x18\x02 \x01(\t\"6\n\x0f\x43onvert_Request\x12\x13\n\x0b\x61udioformat\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\"!\n\x11Simple_Json_Reply\x12\x0c\n\x04json\x18\x01 \x01(\t\"\x1a\n\x0b\x41rray_Reply\x12\x0b\n\x03\x61rr\x18\x01 \x03(\t\"\x1f\n\rConvert_Reply\x12\x0e\n\x06\x62\x61se64\x18\x01 \x01(\x0c\"\"\n\x12Message_Keys_Reply\x12\x0c\n\x04keys\x18\x01 \x03(\t2\xf0\x01\n\x08Myserver\x12\x32\n\x07GetKeys\x12\x12.prot.Keys_Request\x1a\x11.prot.Array_Reply\"\x00\x12\x41\n\x0cGenerateJson\x12\x16.prot.Generate_Request\x1a\x17.prot.Simple_Json_Reply\"\x00\x12\x34\n\tFindValue\x12\x12.prot.Find_Request\x1a\x11.prot.Array_Reply\"\x00\x12\x37\n\x07\x43onvert\x12\x15.prot.Convert_Request\x1a\x13.prot.Convert_Reply\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'prot_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _KEYS_REQUEST._serialized_start=20
-  _KEYS_REQUEST._serialized_end=48
-  _GENERATE_REQUEST._serialized_start=50
-  _GENERATE_REQUEST._serialized_end=100
-  _FIND_REQUEST._serialized_start=102
-  _FIND_REQUEST._serialized_end=145
-  _CONVERT_REQUEST._serialized_start=147
-  _CONVERT_REQUEST._serialized_end=201
-  _SIMPLE_JSON_REPLY._serialized_start=203
-  _SIMPLE_JSON_REPLY._serialized_end=236
-  _CONVERT_REPLY._serialized_start=238
-  _CONVERT_REPLY._serialized_end=269
-  _MYSERVER._serialized_start=272
-  _MYSERVER._serialized_end=516
+  _KEYS_REQUEST._serialized_start=77
+  _KEYS_REQUEST._serialized_end=105
+  _GENERATE_REQUEST._serialized_start=107
+  _GENERATE_REQUEST._serialized_end=157
+  _FIND_REQUEST._serialized_start=159
+  _FIND_REQUEST._serialized_end=202
+  _CONVERT_REQUEST._serialized_start=204
+  _CONVERT_REQUEST._serialized_end=258
+  _SIMPLE_JSON_REPLY._serialized_start=260
+  _SIMPLE_JSON_REPLY._serialized_end=293
+  _ARRAY_REPLY._serialized_start=295
+  _ARRAY_REPLY._serialized_end=321
+  _CONVERT_REPLY._serialized_start=323
+  _CONVERT_REPLY._serialized_end=354
+  _MESSAGE_KEYS_REPLY._serialized_start=356
+  _MESSAGE_KEYS_REPLY._serialized_end=390
+  _MYSERVER._serialized_start=393
+  _MYSERVER._serialized_end=633
 # @@protoc_insertion_point(module_scope)

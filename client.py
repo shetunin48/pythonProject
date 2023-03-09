@@ -41,7 +41,7 @@ def client():
 
         elif "--generate" in sys.argv:
             ind = sys.argv.index("--generate")
-            request = prot_pb2.Generate_Request(level=int(sys.argv[ind + 1]), numkeys=sys.argv[ind + 2])
+            request = prot_pb2.Generate_Request(level=int(sys.argv[ind + 1]), numkeys=int(sys.argv[ind + 2]))
             print(json.loads(stub.GenerateJson(request).json), file=file_out)
 
         elif "--find" in sys.argv:

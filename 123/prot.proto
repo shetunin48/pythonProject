@@ -1,14 +1,12 @@
 syntax = "proto3";
-import "google/protobuf/any.proto";
-import "google/protobuf/struct.proto";
 
 package prot;
 
 service Myserver {
-    rpc GetKeys (Keys_Request) returns (Array_Reply) {}
-    rpc GenerateJson (Generate_Request) returns (Simple_Json_Reply) {}
-    rpc FindValue (Find_Request) returns (Array_Reply) {}
-    rpc Convert (Convert_Request) returns (Convert_Reply) {}
+    rpc GetKeys (Keys_Request) returns (Simple_Json_Reply);
+    rpc GenerateJson (Generate_Request) returns (Simple_Json_Reply);
+    rpc FindValue (Find_Request) returns (Simple_Json_Reply);
+    rpc Convert (Convert_Request) returns (Convert_Reply);
 }
 
 // messages types
@@ -32,13 +30,7 @@ message Convert_Request {
 message Simple_Json_Reply {
     string json = 1;
 }
-message Array_Reply {
-    repeated string arr = 1;
-}
+
 message Convert_Reply {
     bytes base64 = 1;
 }
-message Message_Keys_Reply {
-    repeated string keys = 1;
-}
-

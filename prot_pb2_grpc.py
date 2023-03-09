@@ -17,7 +17,7 @@ class MyserverStub(object):
         self.GetKeys = channel.unary_unary(
                 '/prot.Myserver/GetKeys',
                 request_serializer=prot__pb2.Keys_Request.SerializeToString,
-                response_deserializer=prot__pb2.Simple_Json_Reply.FromString,
+                response_deserializer=prot__pb2.Array_Reply.FromString,
                 )
         self.GenerateJson = channel.unary_unary(
                 '/prot.Myserver/GenerateJson',
@@ -27,7 +27,7 @@ class MyserverStub(object):
         self.FindValue = channel.unary_unary(
                 '/prot.Myserver/FindValue',
                 request_serializer=prot__pb2.Find_Request.SerializeToString,
-                response_deserializer=prot__pb2.Simple_Json_Reply.FromString,
+                response_deserializer=prot__pb2.Array_Reply.FromString,
                 )
         self.Convert = channel.unary_unary(
                 '/prot.Myserver/Convert',
@@ -69,7 +69,7 @@ def add_MyserverServicer_to_server(servicer, server):
             'GetKeys': grpc.unary_unary_rpc_method_handler(
                     servicer.GetKeys,
                     request_deserializer=prot__pb2.Keys_Request.FromString,
-                    response_serializer=prot__pb2.Simple_Json_Reply.SerializeToString,
+                    response_serializer=prot__pb2.Array_Reply.SerializeToString,
             ),
             'GenerateJson': grpc.unary_unary_rpc_method_handler(
                     servicer.GenerateJson,
@@ -79,7 +79,7 @@ def add_MyserverServicer_to_server(servicer, server):
             'FindValue': grpc.unary_unary_rpc_method_handler(
                     servicer.FindValue,
                     request_deserializer=prot__pb2.Find_Request.FromString,
-                    response_serializer=prot__pb2.Simple_Json_Reply.SerializeToString,
+                    response_serializer=prot__pb2.Array_Reply.SerializeToString,
             ),
             'Convert': grpc.unary_unary_rpc_method_handler(
                     servicer.Convert,
@@ -109,7 +109,7 @@ class Myserver(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/prot.Myserver/GetKeys',
             prot__pb2.Keys_Request.SerializeToString,
-            prot__pb2.Simple_Json_Reply.FromString,
+            prot__pb2.Array_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -143,7 +143,7 @@ class Myserver(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/prot.Myserver/FindValue',
             prot__pb2.Find_Request.SerializeToString,
-            prot__pb2.Simple_Json_Reply.FromString,
+            prot__pb2.Array_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
