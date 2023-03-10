@@ -9,11 +9,14 @@ import prot_pb2
 import prot_pb2_grpc
 from consts import MAX_MESSAGE_LENGTH, DEFAULT_URL
 from rjson import generate_json, get_keys, find_value
+import google.protobuf.message
 
 
 class Myserver(prot_pb2_grpc.MyserverServicer):
+
     def GetKeys(self, request, context):
         print("Get Keys")
+        print(request.json)
         js = get_keys(request.json)
         reply = prot_pb2.Array_Reply(arr=js)
         return reply

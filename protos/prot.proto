@@ -7,8 +7,8 @@ service Myserver {
     rpc GenerateJson (Generate_Request) returns (Simple_Json_Reply) {}
     rpc FindValue (Find_Request) returns (Array_Reply) {}
     rpc Convert (Convert_Request) returns (Convert_Reply) {}
-}
 
+}
 // messages types
 message Keys_Request {
     string json = 1;
@@ -39,4 +39,3 @@ message Convert_Reply {
 message Message_Keys_Reply {
     repeated string keys = 1;
 }
-

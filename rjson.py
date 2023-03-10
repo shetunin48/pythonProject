@@ -3,6 +3,7 @@ import string
 from random import randint, random, choices
 
 from consts import MIN_KEY_LEN, MAX_KEY_LEN, MIN_RAND_INT, MAX_RAND_INT
+from google.protobuf.json_format import MessageToDict, MessageToJson
 
 
 def randstring():
@@ -42,7 +43,7 @@ def generate_json(level, numkeys):
 
 
 def get_keys(js):
-    t_dict = json.loads(js)
+    t_dict = MessageToDict(js)
     a = [i for i in t_dict]
     return a
 
@@ -64,6 +65,6 @@ def search_dict_for_value(t_dict, value, error=None):
 
 
 def find_value(js, value):
-    t_dict = json.loads(js)
+    t_dict = MessageToDict(js)
     a = search_dict_for_value(t_dict, value)
     return a
