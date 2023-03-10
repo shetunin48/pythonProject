@@ -13,29 +13,31 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nprot.proto\x12\x04prot\"\x1c\n\x0cKeys_Request\x12\x0c\n\x04json\x18\x01 \x01(\t\"2\n\x10Generate_Request\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0f\n\x07numkeys\x18\x02 \x01(\x05\"+\n\x0c\x46ind_Request\x12\r\n\x05value\x18\x01 \x01(\t\x12\x0c\n\x04json\x18\x02 \x01(\t\"6\n\x0f\x43onvert_Request\x12\x13\n\x0b\x61udioformat\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\"!\n\x11Simple_Json_Reply\x12\x0c\n\x04json\x18\x01 \x01(\t\"\x1a\n\x0b\x41rray_Reply\x12\x0b\n\x03\x61rr\x18\x01 \x03(\t\"\x1f\n\rConvert_Reply\x12\x0e\n\x06\x62\x61se64\x18\x01 \x01(\x0c\"\"\n\x12Message_Keys_Reply\x12\x0c\n\x04keys\x18\x01 \x03(\t2\xf0\x01\n\x08Myserver\x12\x32\n\x07GetKeys\x12\x12.prot.Keys_Request\x1a\x11.prot.Array_Reply\"\x00\x12\x41\n\x0cGenerateJson\x12\x16.prot.Generate_Request\x1a\x17.prot.Simple_Json_Reply\"\x00\x12\x34\n\tFindValue\x12\x12.prot.Find_Request\x1a\x11.prot.Array_Reply\"\x00\x12\x37\n\x07\x43onvert\x12\x15.prot.Convert_Request\x1a\x13.prot.Convert_Reply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nprot.proto\x12\x04prot\"\x0f\n\rEmpty_message\"\x1c\n\x0cKeys_Request\x12\x0c\n\x04json\x18\x01 \x01(\t\"2\n\x10Generate_Request\x12\r\n\x05level\x18\x01 \x01(\x05\x12\x0f\n\x07numkeys\x18\x02 \x01(\x05\"+\n\x0c\x46ind_Request\x12\r\n\x05value\x18\x01 \x01(\t\x12\x0c\n\x04json\x18\x02 \x01(\t\"6\n\x0f\x43onvert_Request\x12\x13\n\x0b\x61udioformat\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\"!\n\x11Simple_Json_Reply\x12\x0c\n\x04json\x18\x01 \x01(\t\"\x1a\n\x0b\x41rray_Reply\x12\x0b\n\x03\x61rr\x18\x01 \x03(\t\"\x1f\n\rConvert_Reply\x12\x0e\n\x06\x62\x61se64\x18\x01 \x01(\x0c\"\"\n\x12Message_Keys_Reply\x12\x0c\n\x04keys\x18\x01 \x03(\t2\xa2\x02\n\x08Myserver\x12\x32\n\x07GetKeys\x12\x12.prot.Keys_Request\x1a\x11.prot.Array_Reply\"\x00\x12\x41\n\x0cGenerateJson\x12\x16.prot.Generate_Request\x1a\x17.prot.Simple_Json_Reply\"\x00\x12\x34\n\tFindValue\x12\x12.prot.Find_Request\x1a\x11.prot.Array_Reply\"\x00\x12\x37\n\x07\x43onvert\x12\x15.prot.Convert_Request\x1a\x13.prot.Convert_Reply\"\x00\x12\x30\n\x04Test\x12\x13.prot.Empty_message\x1a\x11.prot.Array_Reply\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'prot_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _KEYS_REQUEST._serialized_start=20
-  _KEYS_REQUEST._serialized_end=48
-  _GENERATE_REQUEST._serialized_start=50
-  _GENERATE_REQUEST._serialized_end=100
-  _FIND_REQUEST._serialized_start=102
-  _FIND_REQUEST._serialized_end=145
-  _CONVERT_REQUEST._serialized_start=147
-  _CONVERT_REQUEST._serialized_end=201
-  _SIMPLE_JSON_REPLY._serialized_start=203
-  _SIMPLE_JSON_REPLY._serialized_end=236
-  _ARRAY_REPLY._serialized_start=238
-  _ARRAY_REPLY._serialized_end=264
-  _CONVERT_REPLY._serialized_start=266
-  _CONVERT_REPLY._serialized_end=297
-  _MESSAGE_KEYS_REPLY._serialized_start=299
-  _MESSAGE_KEYS_REPLY._serialized_end=333
-  _MYSERVER._serialized_start=336
-  _MYSERVER._serialized_end=576
+  _EMPTY_MESSAGE._serialized_start=20
+  _EMPTY_MESSAGE._serialized_end=35
+  _KEYS_REQUEST._serialized_start=37
+  _KEYS_REQUEST._serialized_end=65
+  _GENERATE_REQUEST._serialized_start=67
+  _GENERATE_REQUEST._serialized_end=117
+  _FIND_REQUEST._serialized_start=119
+  _FIND_REQUEST._serialized_end=162
+  _CONVERT_REQUEST._serialized_start=164
+  _CONVERT_REQUEST._serialized_end=218
+  _SIMPLE_JSON_REPLY._serialized_start=220
+  _SIMPLE_JSON_REPLY._serialized_end=253
+  _ARRAY_REPLY._serialized_start=255
+  _ARRAY_REPLY._serialized_end=281
+  _CONVERT_REPLY._serialized_start=283
+  _CONVERT_REPLY._serialized_end=314
+  _MESSAGE_KEYS_REPLY._serialized_start=316
+  _MESSAGE_KEYS_REPLY._serialized_end=350
+  _MYSERVER._serialized_start=353
+  _MYSERVER._serialized_end=643
 # @@protoc_insertion_point(module_scope)

@@ -34,6 +34,11 @@ class MyserverStub(object):
                 request_serializer=prot__pb2.Convert_Request.SerializeToString,
                 response_deserializer=prot__pb2.Convert_Reply.FromString,
                 )
+        self.Test = channel.unary_unary(
+                '/prot.Myserver/Test',
+                request_serializer=prot__pb2.Empty_message.SerializeToString,
+                response_deserializer=prot__pb2.Array_Reply.FromString,
+                )
 
 
 class MyserverServicer(object):
@@ -63,6 +68,12 @@ class MyserverServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Test(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MyserverServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -85,6 +96,11 @@ def add_MyserverServicer_to_server(servicer, server):
                     servicer.Convert,
                     request_deserializer=prot__pb2.Convert_Request.FromString,
                     response_serializer=prot__pb2.Convert_Reply.SerializeToString,
+            ),
+            'Test': grpc.unary_unary_rpc_method_handler(
+                    servicer.Test,
+                    request_deserializer=prot__pb2.Empty_message.FromString,
+                    response_serializer=prot__pb2.Array_Reply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -161,5 +177,22 @@ class Myserver(object):
         return grpc.experimental.unary_unary(request, target, '/prot.Myserver/Convert',
             prot__pb2.Convert_Request.SerializeToString,
             prot__pb2.Convert_Reply.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Test(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/prot.Myserver/Test',
+            prot__pb2.Empty_message.SerializeToString,
+            prot__pb2.Array_Reply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -13,6 +13,10 @@ import google.protobuf.message
 
 
 class Myserver(prot_pb2_grpc.MyserverServicer):
+    def Test(self, request, context):
+        print("???")
+        print(request.DESCRIPTOR.fields_by_name.keys())
+        return prot_pb2.Array_Reply(arr=request.DESCRIPTOR.fields_by_name.keys())
 
     def GetKeys(self, request, context):
         print("Get Keys")

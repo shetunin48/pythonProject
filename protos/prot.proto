@@ -8,7 +8,12 @@ service Myserver {
     rpc FindValue (Find_Request) returns (Array_Reply) {}
     rpc Convert (Convert_Request) returns (Convert_Reply) {}
 
+    rpc Test(Empty_message) returns (Array_Reply){}
 }
+message Empty_message {
+
+}
+
 // messages types
 message Keys_Request {
     string json = 1;
