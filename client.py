@@ -72,7 +72,10 @@ def client():
 
             request = prot_pb2.Convert_Request(audioformat=(sys.argv[ind + 1].split('.')[-1]), base64=data)
             file_out = try_open(ind + 1, 'wb')
-            file_out.write(stub.Convert(request).base64)
+            reply = stub.Convert(request)
+            data = reply.base64
+            file_out.write(data)
+            print(reply.message)
 
         file_out.close()
 

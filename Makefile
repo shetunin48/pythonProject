@@ -5,5 +5,5 @@ build_proto:
 
 start_server: build_proto
 	pip install pydub
-	python3 main.py
+	python3 main.py --start
 

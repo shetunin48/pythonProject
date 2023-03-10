@@ -5,14 +5,21 @@ import sys
 from pydub import AudioSegment
 from concurrent import futures
 import grpc
+
+import consts
 import prot_pb2
 import prot_pb2_grpc
 from consts import MAX_MESSAGE_LENGTH, DEFAULT_URL
 from rjson import generate_json, get_keys, find_value
 import google.protobuf.message
+import threading
+
+sem = threading.Semaphore(value=1)
 
 
 class Myserver(prot_pb2_grpc.MyserverServicer):
+    flag_for_msg = False
+
     def Test(self, request, context):
         print("???")
         print(request.DESCRIPTOR.fields_by_name.keys())
@@ -22,7 +29,6 @@ class Myserver(prot_pb2_grpc.MyserverServicer):
         print("Get Keys")
         print(request.json)
         js = get_keys(request.json)
-        print(js)
         reply = prot_pb2.Array_Reply(arr=js)
         return reply
 
@@ -41,7 +47,15 @@ class Myserver(prot_pb2_grpc.MyserverServicer):
         return reply
 
     def Convert(self, request, context):
+        if self.flag_for_msg:
+            print("busy")
+            reply = prot_pb2.Convert_Reply(base64=bytes(), message="Server is busy")
+            return reply
+
+        sem.acquire()
+        self.flag_for_msg = True
         print("Convert")
+
         f = io.BytesIO(request.base64)
         flac_audio = AudioSegment.from_file(f, format=request.audioformat)
         flac_audio.export("/tmp/music.mp3", format="mp3", bitrate="320k")
@@ -51,7 +65,9 @@ class Myserver(prot_pb2_grpc.MyserverServicer):
         f.close()
         os.remove("/tmp/music.mp3")
 
-        reply = prot_pb2.Convert_Reply(base64=data)
+        self.flag_for_msg = False
+        sem.release()
+        reply = prot_pb2.Convert_Reply(base64=data, message="successfully")
         return reply
 
 
@@ -74,14 +90,13 @@ def main():
         print("\n------------------------------------------------------------------------------\n"
               "This is grpc server for parsing json objects and converting audio files.\n\n"
               "use --url <ip:port> to open server at this url (default is ", DEFAULT_URL, ")"
-              "\n------------------------------------------------------------------------------\n")
+                                                                                          "\n------------------------------------------------------------------------------\n")
 
     if "--url" in sys.argv:
         url = sys.argv[sys.argv.index("--url") + 1]
 
-    #  if "--start" in sys.argv:
+    #if "--start" in sys.argv:
     serve(url)
 
 
 main()
-
