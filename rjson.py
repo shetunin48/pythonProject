@@ -43,7 +43,7 @@ def generate_json(level, numkeys):
 
 
 def get_keys(js):
-    t_dict = MessageToDict(js)
+    t_dict = json.loads(js)
     a = [i for i in t_dict]
     return a
 
@@ -65,6 +65,6 @@ def search_dict_for_value(t_dict, value, error=None):
 
 
 def find_value(js, value):
-    t_dict = MessageToDict(js)
+    t_dict = json.loads(js)
     a = search_dict_for_value(t_dict, value)
     return a

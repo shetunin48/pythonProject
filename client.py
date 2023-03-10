@@ -40,6 +40,7 @@ def client():
         stub = prot_pb2_grpc.MyserverStub(channel)
 
         file_out = sys.stdout
+
         if "--file" in sys.argv:
             ind = sys.argv.index("--file")
             file_out = try_open(ind)

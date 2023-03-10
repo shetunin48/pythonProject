@@ -22,6 +22,7 @@ class Myserver(prot_pb2_grpc.MyserverServicer):
         print("Get Keys")
         print(request.json)
         js = get_keys(request.json)
+        print(js)
         reply = prot_pb2.Array_Reply(arr=js)
         return reply
 
